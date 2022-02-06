@@ -61,38 +61,9 @@ function onEachFeature(feature, layer) {
   // });
 }
 
-function check(index) {
-  const requestedCountryISO = exampleGeoJson.features[index].properties.iso_a3;
-  const requestedCountry = exampleGeoJson.features[index].properties.name;
-  document.querySelector("#command").innerText = "Please select " + requestedCountry;
-  let selectedCountry;
-  let result = document.querySelector("#result");
-  jsonLayer.on('click', function (e) {
-    selectedCountry = e.layer.feature.properties.iso_a3;
-    console.log(selectedCountry);
-    jsonLayer.off('click');//Stop listening for click events after first click
-    if (selectedCountry === requestedCountryISO){
-      result.innerText = "Correct!";
-      colorQueriedCountry(requestedCountryISO, "green");
-    }
-    else {
-      result.innerText = "False!";
-      colorQueriedCountry(requestedCountryISO, "red");
-    } 
-    newCountry();
-  });
-}
+newCountry();
 
-//Colour the polygon of the country just queried either green (correctly selected) or red (incorrectly selected).
-function colorQueriedCountry(requestedCountry, color) {
-  //For each layer (i.e. polygon) the code below is executed.
-  jsonLayer.eachLayer(function (layer) {
-    if (layer.feature.properties.iso_a3===requestedCountry){
-      layer.setStyle({fillColor: color})
-    }
-  });
-}
-
+//Randomly select a new country from the array. Then remove it from array so that it won't be asked again.
 function newCountry() {
   let rndNumber = Math.floor(Math.random() * (exampleGeoJson.features.length - 1));
   console.log(rndNumber);
@@ -100,7 +71,60 @@ function newCountry() {
   check(rndNumber);
   //Remove country from array so that it is not tested again
   console.log(exampleGeoJson.features);
-  exampleGeoJson.features.splice(rndNumber,1);
+  exampleGeoJson.features.splice(rndNumber, 1);
 }
 
-newCountry();
+function check(index) {
+  const requestedCountryISO = exampleGeoJson.features[index].properties.iso_a3;
+  const requestedCountry = exampleGeoJson.features[index].properties.name;
+  setTimeout(changeCountryNameInCommandModal, 1000);
+
+  function changeCountryNameInCommandModal() {
+    document.querySelector(".command").innerHTML = "Please select " + requestedCountry;
+  }
+
+  let selectedCountry;
+
+  jsonLayer.on('click', function (e) {
+    selectedCountry = e.layer.feature.properties.iso_a3;
+    console.log(selectedCountry);
+    jsonLayer.off('click');//Stop listening for click events after first click
+    hideCommandModal();//Hide country-select-command modal
+    if (selectedCountry === requestedCountryISO) {
+      openResultModal("success", "Correct!");
+      colorQueriedCountry(requestedCountryISO, "green");
+    }
+    else {
+      openResultModal("alarm", "Wrong. That was " + e.layer.feature.properties.name);
+      colorQueriedCountry(requestedCountryISO, "red");
+    }
+    newCountry();
+  });
+}
+
+//Show result modal
+function openResultModal(type, text) {
+  const result = document.querySelector(".result");
+  result.classList.remove("show", "alarm", "success");
+  void result.offsetWidth; //Found here: https://css-tricks.com/restart-css-animation/#update-another-javascript-method-to-restart-a-css-animation
+  result.innerHTML = text;
+  result.classList.add("show", type);
+}
+
+//Hide command modal
+function hideCommandModal() {
+  const command = document.querySelector(".command");
+  command.classList.remove("hide-command");
+  void command.offsetWidth; //Found here: https://css-tricks.com/restart-css-animation/#update-another-javascript-method-to-restart-a-css-animation
+  command.classList.add("hide-command");
+}
+
+//Colour the polygon of the country just queried either green (correctly selected) or red (incorrectly selected).
+function colorQueriedCountry(requestedCountry, color) {
+  //For each layer (i.e. polygon) the code below is executed.
+  jsonLayer.eachLayer(function (layer) {
+    if (layer.feature.properties.iso_a3 === requestedCountry) {
+      layer.setStyle({ fillColor: color })
+    }
+  });
+}
