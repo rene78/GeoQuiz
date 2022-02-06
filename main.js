@@ -12,7 +12,7 @@ function addLeafletMap() {
   const EsriWorldShadedRelief = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}', {
     attribution: 'Tiles &copy; Esri &mdash; Source: Esri',
     maxZoom: 13,
-    minZoom:3
+    minZoom: 3
   });
 
   myMap = L.map('map', {
