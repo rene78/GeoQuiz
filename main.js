@@ -78,7 +78,7 @@ function newCountry() {
 function check(index) {
   const requestedCountryISO = exampleGeoJson.features[index].properties.iso_a3;
   const requestedCountry = exampleGeoJson.features[index].properties.name;
-  setTimeout(changeCountryNameInCommandModal, 1000);
+  changeCountryNameInCommandModal();
 
   function changeCountryNameInCommandModal() {
     document.querySelector(".command").innerHTML = "Please select " + requestedCountry;
@@ -99,7 +99,7 @@ function check(index) {
       openResultModal("alarm", "Wrong. That was " + e.layer.feature.properties.name);
       colorQueriedCountry(requestedCountryISO, "red");
     }
-    setTimeout(newCountry, 3000);//await animation before starting the next country
+    setTimeout(newCountry, 1800);//await animation before starting the next country
   });
 }
 
