@@ -69,14 +69,15 @@ newCountry();
 //Randomly select a new country from the array. Then remove it from array so that it won't be queried again.
 function newCountry() {
   let rndNumber = Math.floor(Math.random() * (exampleGeoJson.features.length - 1));
-  console.log(rndNumber);
+  // console.log(rndNumber);
 
   check(rndNumber);
   //Remove country from array so that it is not queried again
-  console.log(exampleGeoJson.features);
+  // console.log(exampleGeoJson.features);
   exampleGeoJson.features.splice(rndNumber, 1);
 }
 
+//Check if player selected the correct country
 function check(index) {
   const requestedCountryISO = exampleGeoJson.features[index].properties.iso_a3;
   const requestedCountry = exampleGeoJson.features[index].properties.name;
@@ -95,11 +96,11 @@ function check(index) {
     hideCommandModal();//Hide country-select-command modal
     if (selectedCountry === requestedCountryISO) {
       openResultModal("success", "Correct!");
-      colorQueriedCountry(requestedCountryISO, "green");
+      colorQueriedCountryAndAddTooltip(requestedCountryISO, "green");
     }
     else {
       openResultModal("alarm", "Wrong. That was " + e.layer.feature.properties.name);
-      colorQueriedCountry(requestedCountryISO, "red");
+      colorQueriedCountryAndAddTooltip(requestedCountryISO, "red");
     }
     setTimeout(newCountry, 1800);//await animation before starting the next country
   });
@@ -123,21 +124,15 @@ function hideCommandModal() {
 }
 
 //Colour the polygon of the country just queried either green (correctly selected) or red (incorrectly selected).
-function colorQueriedCountry(requestedCountry, color) {
+//Furthermore add a tooltip in order to see the country name when hovering over it.
+function colorQueriedCountryAndAddTooltip(requestedCountry, color) {
   //For each layer (i.e. polygon) the code below is executed.
   jsonLayer.eachLayer(function (layer) {
     if (layer.feature.properties.iso_a3 === requestedCountry) {
       layer.setStyle({ fillColor: color })
-      //Add country name no queried country as a popup
-      const popupContent = layer.feature.properties.name;
-      layer.bindPopup(popupContent, { closeButton: false });
-
-      layer.on('mouseover', function (e) {
-        this.openPopup();
-      });
-      layer.on('mouseout', function (e) {
-        this.closePopup();
-      });
+      //Add country name no queried country as a tooltip
+      const tooltipContent = layer.feature.properties.name;
+      layer.bindTooltip(tooltipContent);
     }
   });
 }
