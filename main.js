@@ -99,7 +99,7 @@ function check(index) {
       openResultModal("alarm", "Wrong. That was " + e.layer.feature.properties.name);
       colorQueriedCountry(requestedCountryISO, "red");
     }
-    newCountry();
+    setTimeout(newCountry, 3000);//await animation before starting the next country
   });
 }
 
