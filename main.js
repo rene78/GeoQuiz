@@ -16,8 +16,9 @@ function addLeafletMap() {
   });
 
   myMap = L.map('map', {
-    center: [0, 0], //defined by "fitBounds"
-    zoom: 4,
+    //center: [0, 0], //defined by "fitBounds"
+    //zoom: 4, //defined by "fitBounds"
+    zoomControl: false, //hide zoom control buttons
     layers: EsriWorldShadedRelief
   });
 }
@@ -41,6 +42,7 @@ function style() {
   return { "fillColor": undefined, "opacity": 1, "fillOpacity": 0.7, "color": "#555555", "weight": 2 };
 }
 
+//What happens when clicking or hovering over each polygon
 function onEachFeature(feature, layer) {
   // console.log(feature);
   // console.log(layer);
@@ -64,13 +66,13 @@ function onEachFeature(feature, layer) {
 
 newCountry();
 
-//Randomly select a new country from the array. Then remove it from array so that it won't be asked again.
+//Randomly select a new country from the array. Then remove it from array so that it won't be queried again.
 function newCountry() {
   let rndNumber = Math.floor(Math.random() * (exampleGeoJson.features.length - 1));
   console.log(rndNumber);
 
   check(rndNumber);
-  //Remove country from array so that it is not tested again
+  //Remove country from array so that it is not queried again
   console.log(exampleGeoJson.features);
   exampleGeoJson.features.splice(rndNumber, 1);
 }
@@ -126,6 +128,16 @@ function colorQueriedCountry(requestedCountry, color) {
   jsonLayer.eachLayer(function (layer) {
     if (layer.feature.properties.iso_a3 === requestedCountry) {
       layer.setStyle({ fillColor: color })
+      //Add country name no queried country as a popup
+      const popupContent = layer.feature.properties.name;
+      layer.bindPopup(popupContent, { closeButton: false });
+
+      layer.on('mouseover', function (e) {
+        this.openPopup();
+      });
+      layer.on('mouseout', function (e) {
+        this.closePopup();
+      });
     }
   });
 }
