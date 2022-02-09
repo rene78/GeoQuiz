@@ -19,11 +19,10 @@ html, body, .map-container {
   left: 0;
   right: 0;
   padding: 5px 20px;
-  cursor: Default;
   background-color: black;
   color: white;
   opacity: .6;
-  cursor: Default;
+  pointer-events: none;
   font-size: 25px;
   font-weight: bold;
   z-index: 1002;

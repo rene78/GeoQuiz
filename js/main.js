@@ -1,3 +1,5 @@
+import { localeString } from './localeUtils.js';
+
 let myMap;
 let jsonLayer;
 
@@ -5,7 +7,7 @@ let jsonLayer;
 addLeafletMap();
 
 //Load the example GeoJSON into the map
-showGeoJson(exampleGeoJson);
+showGeoJson(countriesGeoJSON);
 
 //Add a Leaflet map to the page
 function addLeafletMap() {
@@ -68,30 +70,31 @@ newCountry();
 
 //Randomly select a new country from the array. Then remove it from array so that it won't be queried again.
 function newCountry() {
-  let rndNumber = Math.floor(Math.random() * (exampleGeoJson.features.length - 1));
+  let rndNumber = Math.floor(Math.random() * (countriesGeoJSON.features.length - 1));
   // console.log(rndNumber);
 
   check(rndNumber);
   //Remove country from array so that it is not queried again
-  // console.log(exampleGeoJson.features);
-  exampleGeoJson.features.splice(rndNumber, 1);
+  // console.log(countriesGeoJSON.features);
+  countriesGeoJSON.features.splice(rndNumber, 1);
 }
 
 //Check if player selected the correct country
 function check(index) {
-  const requestedCountryISO = exampleGeoJson.features[index].properties.iso_a3;
-  const requestedCountry = exampleGeoJson.features[index].properties.name;
+  const requestedCountryISO = countriesGeoJSON.features[index].properties.iso_a3;
+  // console.log(requestedCountryISO);
+  const requestedCountry = countriesGeoJSON.features[index].properties.name;
   changeCountryNameInCommandModal();
 
   function changeCountryNameInCommandModal() {
-    document.querySelector(".command").innerHTML = "Please select " + requestedCountry;
+    document.querySelector(".command").innerHTML = `${localeString("terms", "select")} ${localeString("countries", requestedCountryISO)}`;
   }
 
   let selectedCountry;
 
   jsonLayer.on('click', function (e) {
     selectedCountry = e.layer.feature.properties.iso_a3;
-    console.log(selectedCountry);
+    // console.log(selectedCountry);
     jsonLayer.off('click');//Stop listening for click events after first click
     hideCommandModal();//Hide country-select-command modal
     if (selectedCountry === requestedCountryISO) {

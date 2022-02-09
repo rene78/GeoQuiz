@@ -1,5 +1,5 @@
 //Example GeoJSON from https://geojson-maps.ash.ms/, to be compressed with https://mapshaper.org/
-let exampleGeoJson =
+let countriesGeoJSON =
 {
   "type": "FeatureCollection",
   "features": [
