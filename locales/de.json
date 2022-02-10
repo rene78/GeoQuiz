@@ -1,11 +1,3 @@
 {
-  "countries": {
-    "DZA": "Algerien",
-    "TUN": "Tunesien",
-    "LBY": "Libyen",
-    "MAR": "Marokko"
-  },
-  "terms": {
-    "select": "Bitte selektiere"
-  }
+  "select": "Bitte selektiere"
 }

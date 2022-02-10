@@ -1,4 +1,4 @@
-import { localeString } from './localeUtils.js';
+import { localeCountry, localeString } from './localeUtils.js';
 
 let myMap;
 let jsonLayer;
@@ -87,7 +87,7 @@ function check(index) {
   changeCountryNameInCommandModal();
 
   function changeCountryNameInCommandModal() {
-    document.querySelector(".command").innerHTML = `${localeString("terms", "select")} ${localeString("countries", requestedCountryISO)}`;
+    document.querySelector(".command").innerHTML = `${localeString("select")} ${localeCountry(requestedCountryISO)}`;
   }
 
   let selectedCountry;
