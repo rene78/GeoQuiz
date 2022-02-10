@@ -1,6 +1,5 @@
 const languages = ["de", "en"]; //Available languages on website. To be updated when a new language is added in Transifex
 const preferredBrowserLanguage = getPreferredBrowserLanguage();
-console.log(preferredBrowserLanguage);
 
 //Check the preferred browser languages and see, if we have a translation for it
 //Go through all preferred languages defined in the browser and take the first match. If no match - English will be loaded.

@@ -98,11 +98,11 @@ function check(index) {
     jsonLayer.off('click');//Stop listening for click events after first click
     hideCommandModal();//Hide country-select-command modal
     if (selectedCountry === requestedCountryISO) {
-      openResultModal("success", "Correct!");
+      openResultModal("success", localeString("correct"));
       colorQueriedCountryAndAddTooltip(requestedCountryISO, "green");
     }
     else {
-      openResultModal("alarm", "Wrong. That was " + e.layer.feature.properties.name);
+      openResultModal("alarm", localeString("wrong"));
       colorQueriedCountryAndAddTooltip(requestedCountryISO, "red");
     }
     setTimeout(newCountry, 1800);//await animation before starting the next country
@@ -128,13 +128,13 @@ function hideCommandModal() {
 
 //Colour the polygon of the country just queried either green (correctly selected) or red (incorrectly selected).
 //Furthermore add a tooltip in order to see the country name when hovering over it.
-function colorQueriedCountryAndAddTooltip(requestedCountry, color) {
+function colorQueriedCountryAndAddTooltip(requestedCountryISO, color) {
   //For each layer (i.e. polygon) the code below is executed.
   jsonLayer.eachLayer(function (layer) {
-    if (layer.feature.properties.iso_a3 === requestedCountry) {
+    if (layer.feature.properties.iso_a3 === requestedCountryISO) {
       layer.setStyle({ fillColor: color })
       //Add country name no queried country as a tooltip
-      const tooltipContent = layer.feature.properties.name;
+      const tooltipContent = localeCountry(requestedCountryISO);
       layer.bindTooltip(tooltipContent);
     }
   });

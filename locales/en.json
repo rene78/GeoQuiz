@@ -1,3 +1,5 @@
 {
-  "select": "Please select"
+  "select": "Please select",
+  "correct": "Correct!",
+  "wrong": "Wrong!"
 }
