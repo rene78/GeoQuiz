@@ -44,16 +44,3 @@ export function localeCountry(countryToLookUpAlpha3) {
   // console.log(countryName || countryNameFallback);
   return countryName || countryNameFallback; //return country name - if not available in preferred language then in EN
 }
-
-//temp
-function CheckFileExist(fileToCheck) {
-  return new Promise((resolve, reject) => {
-    fetch(fileToCheck).then(res => {
-      if (res.status == 404) resolve(false);
-      if (res.status == 200) resolve(true);
-      return res.text()
-    })
-  })
-}
-var exists = await CheckFileExist("./locales/zh.json");
-console.log(exists);
