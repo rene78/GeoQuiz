@@ -1,4 +1,33 @@
-const languages = ["de", "en"]; //Available languages on website. To be updated when a new language is added in Transifex
+const languages = [
+  'ar',
+  'bg',
+  'cs',
+  'da',
+  'de',
+  'el',
+  'en',
+  'eo',
+  'es',
+  'et',
+  'eu',
+  'fi',
+  'fr',
+  'hu',
+  'it',
+  'ja',
+  'ko',
+  'lt',
+  'nl',
+  'no',
+  'pl',
+  'pt',
+  'ro',
+  'ru',
+  'sk',
+  'sv',
+  'th',
+  'uk',
+  'zh'] //Available languages on website. To be updated when a new language is added in Transifex
 const preferredBrowserLanguage = getPreferredBrowserLanguage();
 
 //Check the preferred browser languages and see, if we have a translation for it
