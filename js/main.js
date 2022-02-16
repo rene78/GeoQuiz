@@ -8,6 +8,10 @@ import { asiaGeoJSON } from '../data/asia.js';
 let myMap;
 let leafletContinentLayer;
 let continentGeoJSON;
+let overallCountriesToQuery;
+let correctAnswers = 0;
+let timer;
+let timePlayed = 0;
 
 //Add the base map without any layers.
 addLeafletMap();
@@ -110,11 +114,14 @@ function startGame(continent) {
     default: console.error("Wrong input for continent");
   }
 
+  overallCountriesToQuery = continentGeoJSON.features.length;
+
   myMap.eachLayer(function (layer) {
-    if (!!layer.toGeoJSON) {//Can the layer be converted into a valid GeoJSON? Will be true for all but the tile layer.
+    if (!!layer.toGeoJSON) { //Can the layer be converted into a valid GeoJSON? Will be true for all but the tile layer.
       myMap.removeLayer(layer);
     }
   });
+  startStopTimer("start"); //Start timer
   showSingleContinentGeoJson(continentGeoJSON); //Load the geojson
   newCountry(); //Query the first country
 }
@@ -166,13 +173,16 @@ function newCountry() {
     // console.log("Length: " + continentGeoJSON.features.length);
     let rndNumber = Math.floor(Math.random() * (continentGeoJSON.features.length - 1));
     // console.log(rndNumber);
-
     check(rndNumber);
     //Remove country from array so that it is not queried again
     // console.log(continentGeoJSON.features);
     continentGeoJSON.features.splice(rndNumber, 1);
+    let currentGameCounter = overallCountriesToQuery - continentGeoJSON.features.length;
+    console.log(currentGameCounter + "/" + overallCountriesToQuery);
   } else {
     console.log("Game finished!");
+    startStopTimer("stop");
+    console.log("Correct answers: " + correctAnswers + " out of " + overallCountriesToQuery + " queried countries");
     document.querySelector(".command").innerText = "Do you wanna play again?";
   }
 }
@@ -196,6 +206,7 @@ function check(index) {
     leafletContinentLayer.off('click');//Stop listening for click events after first click
     hideCommandModal();//Hide country-select-command modal
     if (selectedCountry === requestedCountryISO) {
+      correctAnswers++;
       openResultModal("success", localeString("correct"));
       colorQueriedCountryAndAddTooltip(requestedCountryISO, "green");
     }
@@ -238,5 +249,17 @@ function check(index) {
         layer.bindTooltip(tooltipContent);
       }
     });
+  }
+}
+
+//Start/end timer
+function startStopTimer(command) {
+  if (command === "start") {
+    timer = setInterval(function () {
+      timePlayed++
+    }, 1000);
+  } else {
+    clearInterval(timer);
+    console.log("Time needed: " + timePlayed + "s");
   }
 }

@@ -16,7 +16,7 @@ html, body, .map-container {
 }
 
 .not-allowed-cursor{
-  cursor: not-allowed !important
+  cursor: grab !important
 }
 /* #endregion */
 
