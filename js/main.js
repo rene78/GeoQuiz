@@ -187,8 +187,10 @@ function check(index) {
   let selectedCountry;
 
   leafletContinentLayer.on('click', function (e) {
-    e.layer.options.interactive = false;
-    e.layer.options.bubblingMouseEvents = false;
+    var layer = e.layer;
+    // console.log(e);
+    if (layer.wasClicked) return;
+
     selectedCountry = e.layer.feature.properties.iso_a3;
     // console.log(selectedCountry);
     leafletContinentLayer.off('click');//Stop listening for click events after first click
@@ -228,6 +230,9 @@ function check(index) {
     leafletContinentLayer.eachLayer(function (layer) {
       if (layer.feature.properties.iso_a3 === requestedCountryISO) {
         layer.setStyle({ fillColor: color });
+        layer._path.classList.add("not-allowed-cursor");
+        layer.wasClicked = true;
+
         //Add country name no queried country as a tooltip
         const tooltipContent = localeCountry(requestedCountryISO);
         layer.bindTooltip(tooltipContent);

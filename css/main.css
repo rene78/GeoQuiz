@@ -1,3 +1,4 @@
+/* #region CSS RELATED TO GENERAL PAGE LAYOUT */
 body {
   margin: 0;
 }
@@ -6,12 +7,20 @@ html, body, .map-container {
   height: 100%;
   width: 100vw;
 }
+/* #endregion */
 
+/* #region CSS RELATED TO LEAFLET MAP */
 #map {
   width: 100%;
   height: 100%;
 }
 
+.not-allowed-cursor{
+  cursor: not-allowed !important
+}
+/* #endregion */
+
+/* #region CSS RELATED TO COMMAND AND RESULT MODALS */
 .command {
   text-align: center;
   position: fixed;
@@ -78,3 +87,4 @@ html, body, .map-container {
   background-color: green;
   color: white;
 }
+/* #endregion */
