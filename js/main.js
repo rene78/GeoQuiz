@@ -178,12 +178,13 @@ function newCountry() {
     // console.log(continentGeoJSON.features);
     continentGeoJSON.features.splice(rndNumber, 1);
     let currentGameCounter = overallCountriesToQuery - continentGeoJSON.features.length;
-    console.log(currentGameCounter + "/" + overallCountriesToQuery);
+    // console.log(currentGameCounter + "/" + overallCountriesToQuery);
+    document.querySelector(".progress").innerText = currentGameCounter + "/" + overallCountriesToQuery;
   } else {
     console.log("Game finished!");
     startStopTimer("stop");
     console.log("Correct answers: " + correctAnswers + " out of " + overallCountriesToQuery + " queried countries");
-    document.querySelector(".command").innerText = "Do you wanna play again?";
+    document.querySelector(".command").innerText = "Finished!";
   }
 }
 
@@ -228,7 +229,7 @@ function check(index) {
 
   //Hide command modal
   function hideCommandModal() {
-    const command = document.querySelector(".command");
+    const command = document.querySelector(".command-container");
     command.classList.remove("hide-command");
     void command.offsetWidth; //Found here: https://css-tricks.com/restart-css-animation/#update-another-javascript-method-to-restart-a-css-animation
     command.classList.add("hide-command");
@@ -256,7 +257,8 @@ function check(index) {
 function startStopTimer(command) {
   if (command === "start") {
     timer = setInterval(function () {
-      timePlayed++
+      timePlayed++;
+      document.querySelector(".time-elapsed").innerText = timePlayed + "s";
     }, 1000);
   } else {
     clearInterval(timer);
