@@ -116,14 +116,43 @@ function startGame(continent) {
 
   overallCountriesToQuery = continentGeoJSON.features.length;
 
+  //Remove all GeoJSON layers before loading the continent
   myMap.eachLayer(function (layer) {
     if (!!layer.toGeoJSON) { //Can the layer be converted into a valid GeoJSON? Will be true for all but the tile layer.
       myMap.removeLayer(layer);
     }
   });
-  startStopTimer("start"); //Start timer
   showSingleContinentGeoJson(continentGeoJSON); //Load the geojson
-  newCountry(); //Query the first country
+  startCountdownAnimation()//Show 3-2-1 countdown before game starts. Afterwards start the game.
+}
+
+//Show 3-2-1 countdown before game starts. Afterwards start the game.
+function startCountdownAnimation() {
+  let elements = document.querySelectorAll(".countdown");
+  for (var i = 0; i < elements.length; i++) {
+    elements[i].classList.add('start-animation');
+  }
+
+  //Blur the background during countdown timer animation
+  let elementsToBlur = document.querySelectorAll(".to-blur");
+  for (var i = 0; i < elementsToBlur.length; i++) {
+    elementsToBlur[i].classList.add('blur');
+  }
+
+  //After 4s start the game timer and query the first country
+  //Remove animation class again after 4s, so that startCountdownAnimation() can be called again
+  setTimeout(function () {
+    startStopTimer("start"); //Start timer
+    newCountry(); //Query the first country
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].classList.remove('start-animation');
+    }
+    //Unblur the background after countdown timer animation
+    let elementsToBlur = document.querySelectorAll(".to-blur");
+    for (var i = 0; i < elementsToBlur.length; i++) {
+      elementsToBlur[i].classList.remove('blur');
+    }
+  }, 3500)
 }
 
 //Show GeoJSON polygons of a single continent on the Leaflet map
@@ -183,7 +212,7 @@ function newCountry() {
   } else {
     console.log("Game finished!");
     startStopTimer("stop");
-    console.log("Correct answers: " + correctAnswers + " out of " + overallCountriesToQuery + " queried countries");
+    console.log("Correct answers: " + correctAnswers + " out of " + overallCountriesToQuery);
     document.querySelector(".command").innerText = "Finished!";
   }
 }
@@ -258,7 +287,7 @@ function startStopTimer(command) {
   if (command === "start") {
     timer = setInterval(function () {
       timePlayed++;
-      document.querySelector(".time-elapsed").innerText = timePlayed + "s";
+      document.querySelector(".time-elapsed").innerText = "\u{1F557}" + timePlayed + "s";
     }, 1000);
   } else {
     clearInterval(timer);

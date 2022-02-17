@@ -16,26 +16,95 @@ html, body, .map-container {
   height: 100%;
 }
 
-.not-allowed-cursor{
+.not-allowed-cursor {
   cursor: grab !important
+}
+
+.blur {
+  filter: blur(8px);
+}
+/* #endregion */
+
+/* #region CSS RELATED TO 3-2-1 COUNTDOWN TIMER*/
+.countdown-timer {
+  pointer-events: none;
+  font-size: 140px;
+  /* color: #778F9B; */
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  z-index: 1003;
+}
+
+.countdown-timer span {
+  position: absolute;
+  opacity: 0;
+  top: 200px;
+}
+
+@keyframes time {
+
+  0%,
+  10%,
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+
+  5% {
+    opacity: 0.8;
+    transform: scale(1.2);
+  }
+}
+
+.start-animation {
+  animation: time 4s;
+}
+
+.go {
+  animation-delay: 3s;
+  color: #FF1643;
+  left: calc(50% - 110px);
+}
+
+.num1,
+.num2,
+.num3 {
+  left: calc(50% - 40px);
+}
+
+.num1 {
+  animation-delay: 2s;
+}
+
+.num2 {
+  animation-delay: 1s;
+}
+
+.num3 {
+  animation-delay: 0s;
 }
 /* #endregion */
 
 /* #region CSS RELATED TO COMMAND AND RESULT MODALS */
-.command-container {
+.command-container, .result {
   text-align: center;
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: 5px 40px;
-  background-color: black;
-  color: white;
   opacity: .6;
   pointer-events: none;
   font-size: 20px;
   font-weight: bold;
   z-index: 1002;
+}
+
+.command-container {
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 5px 60px 5px 40px;
+  background-color: black;
+  color: white;
 }
 
 .hide-command {
@@ -68,18 +137,10 @@ html, body, .map-container {
 }
 
 .result {
-  text-align: center;
-  position: fixed;
   bottom: -100px;
   left: 0;
   right: 0;
   padding: 5px 20px;
-  /* background-color: #FFFFFF; */
-  opacity: .6;
-  cursor: Default;
-  font-size: 25px;
-  font-weight: bold;
-  z-index: 1002;
 }
 
 .show {
