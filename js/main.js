@@ -72,7 +72,7 @@ function showContinentsGeoJson() {
     });
 
     //Add contintent name as a tooltip (TODO: Add translation - "America", "Asia, Australia and Oceania", "Europe and Russia", "Africa")
-    const tooltipContent = feature.properties.continent;
+    const tooltipContent = localeString(feature.properties.continent);
     layer.bindTooltip(tooltipContent);
   }
 
