@@ -8,6 +8,7 @@ import { asiaGeoJSON } from '../data/asia.js';
 let myMap;
 let leafletContinentLayer;
 let continentGeoJSON;
+let selectedContinent;
 let overallCountriesToQuery;
 let correctAnswers = 0;
 let timer;
@@ -66,9 +67,9 @@ function showContinentsGeoJson() {
 
     //bind click
     layer.on('click', function (e) {
-      let selectedContinent = feature.properties.continent;
+      selectedContinent = feature.properties.continent;
       // console.log(selectedContinent);
-      startGame(selectedContinent);
+      startGame();
     });
 
     //Add contintent name as a tooltip (TODO: Add translation - "America", "Asia, Australia and Oceania", "Europe and Russia", "Africa")
@@ -105,8 +106,8 @@ function showContinentsGeoJson() {
 }
 
 //Remove continents GeoJSON, show the GeoJSON of the selected continent on the map and move on to newCountry functions
-function startGame(continent) {
-  switch (continent) {
+function startGame() {
+  switch (selectedContinent) {
     case 'africa': continentGeoJSON = africaGeoJSON; break;
     case 'asia': continentGeoJSON = asiaGeoJSON; break;
     case 'europe': continentGeoJSON = europeGeoJSON; break;
@@ -197,6 +198,7 @@ function showSingleContinentGeoJson(inputGeoJson) {
 }
 
 //Randomly select a new country from the array. Then remove it from array so that it won't be queried again.
+//Do some stuff once the last country has been queried
 function newCountry() {
   if (continentGeoJSON.features.length) {
     // console.log("Length: " + continentGeoJSON.features.length);
@@ -214,6 +216,7 @@ function newCountry() {
     startStopTimer("stop");
     console.log("Correct answers: " + correctAnswers + " out of " + overallCountriesToQuery);
     document.querySelector(".command").innerText = "Finished!";
+    updateHighscore();
   }
 }
 
@@ -293,4 +296,26 @@ function startStopTimer(command) {
     clearInterval(timer);
     console.log("Time needed: " + timePlayed + "s");
   }
+}
+
+//Update highscore array and save to localstorgage
+function updateHighscore() {
+  const successRate = correctAnswers / overallCountriesToQuery;
+  let newEntry = {successRate, timePlayed};
+  // console.log(newEntry);
+
+  /*
+  - Try to load continent highscore from localstorage. If nothing create array with empty values
+  let asia = [
+    { successRate: 0.00, time: 0 },
+    { successRate: 0.00, time: 0 },
+    { successRate: 0.00, time: 0 },
+    { successRate: 0.00, time: 0 },
+    { successRate: 0.00, time: 0 }
+  ];
+
+  - Add newEntry to highscore list
+  - Write to localstorage
+  - Return highscore to result modal
+  */
 }
