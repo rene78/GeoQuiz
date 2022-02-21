@@ -1,4 +1,4 @@
-export let americaGeoJSON = {
+export const americaGeoJSON = {
   "type": "FeatureCollection",
   "features": [
     {

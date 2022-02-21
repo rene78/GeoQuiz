@@ -1,5 +1,5 @@
 //Example GeoJSON from https://geojson-maps.ash.ms/, to be compressed with https://mapshaper.org/
-export let africaGeoJSON =
+export const africaGeoJSON =
 {
   "type": "FeatureCollection",
   "features": [

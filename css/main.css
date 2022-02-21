@@ -166,3 +166,55 @@ html, body, .map-container {
   color: white;
 }
 /* #endregion */
+
+/* #region CSS RELATED TO END OF GAME INFOBOX */
+.end-of-game-infobox {
+  position: Fixed;
+  font-family: Verdana, Sans-Serif;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1005;
+  opacity: 0;
+  transition: opacity 400ms ease-in;
+  pointer-events: None;
+}
+
+.show {
+  opacity: 1;
+}
+
+.end-of-game-infobox>div {
+  position: relative;
+  margin: 10px;
+  padding: 5px 20px 13px 20px;
+  border-radius: 10px;
+  background-color: #FFFFFF;
+  background: linear-gradient(#FFFFFF, #999999);
+  pointer-events: Auto;
+  cursor: Default;
+}
+
+.play-again-button {
+  position: relative;
+  width: 200px;
+  left: calc(50% - 100px);
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 2px 5px 4px #888888;
+  border-radius: 8px;
+}
+
+.play-again-button:hover {
+  background-color: #247727;
+}
+/* #endregion */
