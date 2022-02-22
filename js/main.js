@@ -227,9 +227,7 @@ function newCountry() {
     console.log("Correct answers: " + correctAnswers + " out of " + overallCountriesToQuery);
     document.querySelector(".command").innerText = "Finished!";
     let position = updateHighscore();
-    document.querySelector(".end-of-game-infobox-heading").innerText = "Result";
-    document.querySelector(".end-of-game-infobox-content").innerText = "Correct answers: " + correctAnswers + " out of " + overallCountriesToQuery + " (" + successRateCalc() * 100 + "%)";
-    document.querySelector(".end-of-game-infobox").classList.add("show");
+    displayEndOfGameInfobox(position);
   }
 }
 
@@ -311,6 +309,41 @@ function startStopTimer(command) {
   }
 }
 
+//Display end-of-game infobox
+function displayEndOfGameInfobox(position) {
+  document.querySelector(".end-of-game-infobox").classList.add("show");
+  document.querySelector(".end-of-game-infobox-heading").innerText = "Result";
+  if (!position) document.querySelector(".end-of-game-infobox-result").innerHTML =`Correct answers: ${correctAnswers} out of ${overallCountriesToQuery} (${Math.round(correctAnswers / overallCountriesToQuery * 100)}%)<br>This is not good enough for a position in the highscore`;// Math.round(correctAnswers / overallCountriesToQuery * 100) + "% correct in " + timePlayed + "s<br>This is not good enough for a position in the highscore";
+  else document.querySelector(".end-of-game-infobox-result").innerText = "Very good! You reached the highscore!";
+  let tableHtml = `
+      <thead>
+        <tr>
+        <th colspan="3">Highscore - ${localeString(selectedContinent)}</th>
+        </tr>
+        <tr>
+          <th>Position</th>
+          <th>Correct answers (%)</th>
+          <th>Time needed</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+  const retrievedHighscoreFromLocalStorage = JSON.parse(localStorage.getItem(selectedContinent));
+  for (let i = 0; i < retrievedHighscoreFromLocalStorage.length; i++) {
+    const timePlayed = retrievedHighscoreFromLocalStorage[i].timePlayed;
+    const successRate = retrievedHighscoreFromLocalStorage[i].successRate;
+    tableHtml += i === position - 1 ? `<tr id="last-game">` : `<tr>`;//define class to color row red or green
+    tableHtml += `<td>${i + 1}</td>`;
+    tableHtml += `<td>${Math.round(successRate * 100)}%</td>`;
+    tableHtml += `<td>${timePlayed < 60 ? `${timePlayed}s` : `${Math.floor(timePlayed / 60)}min ${timePlayed % 60}s`}</td>`;
+    tableHtml += `</tr>`;
+  }
+  tableHtml += `
+      </tbody>
+  `;
+  document.querySelector(".end-of-game-infobox-highscore").innerHTML = tableHtml;
+}
+
 //Start a new game when clicking on "Play again"
 document.querySelector(".play-again-button").addEventListener("click", function () {
   document.querySelector(".end-of-game-infobox").classList.remove("show"); //Hide end of game infobox
@@ -323,7 +356,7 @@ document.querySelector(".play-again-button").addEventListener("click", function 
   document.querySelector(".time-elapsed").innerText = "";
 });
 
-//Update/create highscore array and save to localstorgage
+//Update/create highscore array and save to localstorage
 function updateHighscore() {
   const successRate = successRateCalc();
   let newEntry = { successRate, timePlayed };

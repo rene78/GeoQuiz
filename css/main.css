@@ -170,20 +170,23 @@ html, body, .map-container {
 /* #region CSS RELATED TO END OF GAME INFOBOX */
 .end-of-game-infobox {
   position: Fixed;
-  font-family: Verdana, Sans-Serif;
+  /* font-family: Verdana, Sans-Serif; */
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 1005;
-  opacity: 0;
-  transition: opacity 400ms ease-in;
+  display: none;
+  /* opacity: 0; */
+  /* transition: opacity 400ms ease-in; */
   pointer-events: None;
 }
 
 .show {
-  opacity: 1;
+  /* z-index: 1005; */
+  /* opacity: 1; */
+  display: block;
 }
 
 .end-of-game-infobox>div {
@@ -195,12 +198,13 @@ html, body, .map-container {
   background: linear-gradient(#FFFFFF, #999999);
   pointer-events: Auto;
   cursor: Default;
+  text-align: center;
 }
 
 .play-again-button {
   position: relative;
   width: 200px;
-  left: calc(50% - 100px);
+  /* left: calc(50% - 100px); */
   background-color: #4CAF50;
   border: none;
   color: white;
@@ -216,5 +220,21 @@ html, body, .map-container {
 
 .play-again-button:hover {
   background-color: #247727;
+}
+
+.end-of-game-infobox-highscore {
+  margin: 10px auto;
+}
+
+thead {
+  background-color: grey;
+}
+
+#last-game {
+  background-color: lightgreen;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #F0F0F0;
 }
 /* #endregion */
