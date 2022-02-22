@@ -316,17 +316,17 @@ function displayEndOfGameInfobox(position) {
   if (!position) document.querySelector(".end-of-game-infobox-result").innerHTML =`Correct answers: ${correctAnswers} out of ${overallCountriesToQuery} (${Math.round(correctAnswers / overallCountriesToQuery * 100)}%)<br>This is not good enough for a position in the highscore`;// Math.round(correctAnswers / overallCountriesToQuery * 100) + "% correct in " + timePlayed + "s<br>This is not good enough for a position in the highscore";
   else document.querySelector(".end-of-game-infobox-result").innerText = "Very good! You reached the highscore!";
   let tableHtml = `
-      <thead>
-        <tr>
-        <th colspan="3">Highscore - ${localeString(selectedContinent)}</th>
-        </tr>
-        <tr>
-          <th>Position</th>
-          <th>Correct answers (%)</th>
-          <th>Time needed</th>
-        </tr>
-      </thead>
-      <tbody>
+    <thead>
+      <tr>
+      <th colspan="3">Highscore - ${localeString(selectedContinent)}</th>
+      </tr>
+      <tr>
+        <th>Position</th>
+        <th>Correct answers (%)</th>
+        <th>Time needed</th>
+      </tr>
+    </thead>
+    <tbody>
   `;
   const retrievedHighscoreFromLocalStorage = JSON.parse(localStorage.getItem(selectedContinent));
   for (let i = 0; i < retrievedHighscoreFromLocalStorage.length; i++) {
@@ -339,7 +339,7 @@ function displayEndOfGameInfobox(position) {
     tableHtml += `</tr>`;
   }
   tableHtml += `
-      </tbody>
+    </tbody>
   `;
   document.querySelector(".end-of-game-infobox-highscore").innerHTML = tableHtml;
 }
