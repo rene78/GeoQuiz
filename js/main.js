@@ -21,8 +21,6 @@ addLeafletMap();
 //Load the continents GeoJSON
 showContinentsGeoJson();
 
-
-
 //Add a Leaflet map to the page
 function addLeafletMap() {
   const EsriWorldShadedRelief = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}', {
