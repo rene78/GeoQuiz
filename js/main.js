@@ -343,6 +343,7 @@ function displayEndOfGameInfobox(position) {
     </tbody>
   `;
   document.querySelector(".end-of-game-infobox-highscore").innerHTML = tableHtml;
+  document.querySelector(".play-again-button").innerText = localeString("playAgainButton");
 }
 
 //Start a new game when clicking on "Play again"
