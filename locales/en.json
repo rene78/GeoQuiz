@@ -1,7 +1,8 @@
 {
   "selectContinent": "Select the continent you want to play on",
   "africa": "Africa",
-  "asia": "Asia, Australia and Oceania",
+  "asia": "Asia",
+  "australia": "Australia and Oceania",
   "america": "America",
   "europe": "Europe and Russia",
   "select": "Select",

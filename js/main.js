@@ -2,8 +2,9 @@ import { localeCountry, localeString } from './localeUtils.js';
 import { continentsGeoJSON } from '../data/continents.js';
 import { africaGeoJSON } from '../data/africa.js';
 import { americaGeoJSON } from '../data/america.js';
-import { europeGeoJSON } from '../data/europe.js';
 import { asiaGeoJSON } from '../data/asia.js';
+import { australiaGeoJSON } from '../data/australia.js';
+import { europeGeoJSON } from '../data/europe.js';
 
 let myMap;
 let leafletContinentLayer;
@@ -85,9 +86,10 @@ function showContinentsGeoJson() {
     // console.log(feature.properties.continent);
     switch (feature.properties.continent) {
       case 'africa': style.fillColor = "#4F93C0"; break;
-      case 'asia': style.fillColor = "#8A84A3"; break;
-      case 'europe': style.fillColor = "#D5DC76"; break;
       case 'america': style.fillColor = "#AC5C91"; break;
+      case 'asia': style.fillColor = "#8A84A3"; break;
+      case 'australia': style.fillColor = "#D09440"; break;
+      case 'europe': style.fillColor = "#D5DC76"; break;
     }
     // console.log(style);
     return style;
@@ -111,9 +113,10 @@ function showContinentsGeoJson() {
 function startGame() {
   switch (selectedContinent) {
     case 'africa': continentGeoJSON = africaGeoJSON; break;
-    case 'asia': continentGeoJSON = asiaGeoJSON; break;
-    case 'europe': continentGeoJSON = europeGeoJSON; break;
     case 'america': continentGeoJSON = americaGeoJSON; break;
+    case 'asia': continentGeoJSON = asiaGeoJSON; break;
+    case 'australia': continentGeoJSON = australiaGeoJSON; break;
+    case 'europe': continentGeoJSON = europeGeoJSON; break;
     default: console.error("Wrong input for continent");
   }
 
