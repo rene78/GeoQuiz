@@ -226,7 +226,7 @@ function newCountry() {
     console.log("Game finished!");
     startStopTimer("stop");
     console.log("Correct answers: " + correctAnswers + " out of " + overallCountriesToQuery);
-    document.querySelector(".command").innerText = "Finished!";
+    document.querySelector(".command").innerText = "";
     let position = updateHighscore();
     displayEndOfGameInfobox(position);
   }
@@ -313,18 +313,18 @@ function startStopTimer(command) {
 //Display end-of-game infobox
 function displayEndOfGameInfobox(position) {
   document.querySelector(".end-of-game-infobox").classList.add("show");
-  document.querySelector(".end-of-game-infobox-heading").innerText = "Result";
-  if (!position) document.querySelector(".end-of-game-infobox-result").innerHTML =`Correct answers: ${correctAnswers} out of ${overallCountriesToQuery} (${Math.round(correctAnswers / overallCountriesToQuery * 100)}%)<br>This is not good enough for a position in the highscore`;// Math.round(correctAnswers / overallCountriesToQuery * 100) + "% correct in " + timePlayed + "s<br>This is not good enough for a position in the highscore";
-  else document.querySelector(".end-of-game-infobox-result").innerText = "Very good! You reached the highscore!";
+  document.querySelector(".end-of-game-infobox-heading").innerText = localeString("resultHeading");
+  if (!position) document.querySelector(".end-of-game-infobox-result").innerHTML =`${localeString("correctPicks")} ${correctAnswers} ${localeString("outOf")} ${overallCountriesToQuery} (${Math.round(correctAnswers / overallCountriesToQuery * 100)}%)<br>${localeString("notGoodEnough")}`;
+  else document.querySelector(".end-of-game-infobox-result").innerText = localeString("veryGood");
   let tableHtml = `
     <thead>
       <tr>
-      <th colspan="3">Highscore - ${localeString(selectedContinent)}</th>
+      <th colspan="3">${localeString("highscore")} - ${localeString(selectedContinent)}</th>
       </tr>
       <tr>
-        <th>Position</th>
-        <th>Correct answers (%)</th>
-        <th>Time needed</th>
+        <th>${localeString("position")}</th>
+        <th>${localeString("correctAnswers")}</th>
+        <th>${localeString("timeNeeded")}</th>
       </tr>
     </thead>
     <tbody>
@@ -336,7 +336,7 @@ function displayEndOfGameInfobox(position) {
     tableHtml += i === position - 1 ? `<tr id="last-game">` : `<tr>`;//define class to color row red or green
     tableHtml += `<td>${i + 1}</td>`;
     tableHtml += `<td>${Math.round(successRate * 100)}%</td>`;
-    tableHtml += `<td>${timePlayed < 60 ? `${timePlayed}s` : `${Math.floor(timePlayed / 60)}min ${timePlayed % 60}s`}</td>`;
+    tableHtml += `<td>${timePlayed < 60 ? `${timePlayed}${localeString("secondsAbbr")}` : `${Math.floor(timePlayed / 60)}${localeString("minutesAbbr")} ${timePlayed % 60}${localeString("secondsAbbr")}`}</td>`;
     tableHtml += `</tr>`;
   }
   tableHtml += `
