@@ -1,3 +1,22 @@
 {
-  "select": ""
+  "selectContinent": "Wähle den Kontinent zum Spielen aus",
+  "africa": "Afrika",
+  "america": "Amerika",
+  "asia": "Asien",
+  "australia": "Australien und Ozeanien",
+  "europe": "Europa und Russland",
+  "select": "Selektiere",
+  "correct": "Korrekt!",
+  "wrong": "Falsch",
+  "resultHeading": "Ergebnis",
+  "correctPicks": "Richtig gewählt:",
+  "outOf": "von",
+  "notGoodEnough": "Das ist nicht gut genug für einen Platz auf der Bestenliste",
+  "veryGood": "Sehr gut! Du hast einen Platz in der Bestenliste ergattert!",
+  "highscore": "Bestenliste",
+  "position": "Position",
+  "correctAnswers": "Korrekte Antworten",
+  "timeNeeded": "Benötigte Zeit",
+  "minutesAbbr": "min",
+  "secondsAbbr": "s"
 }
