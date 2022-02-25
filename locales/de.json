@@ -18,5 +18,6 @@
   "correctAnswers": "Korrekte Antworten",
   "timeNeeded": "Benötigte Zeit",
   "minutesAbbr": "min",
-  "secondsAbbr": "s"
+  "secondsAbbr": "s",
+  "playAgainButton": "Erneut spielen"
 }

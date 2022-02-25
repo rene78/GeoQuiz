@@ -223,9 +223,9 @@ function newCountry() {
     // console.log(currentGameCounter + "/" + overallCountriesToQuery);
     document.querySelector(".progress").innerText = currentGameCounter + "/" + overallCountriesToQuery;
   } else {
-    console.log("Game finished!");
+    // console.log("Game finished!");
     startStopTimer("stop");
-    console.log("Correct answers: " + correctAnswers + " out of " + overallCountriesToQuery);
+    // console.log("Correct answers: " + correctAnswers + " out of " + overallCountriesToQuery);
     document.querySelector(".command").innerText = "";
     let position = updateHighscore();
     displayEndOfGameInfobox(position);
@@ -247,7 +247,7 @@ function check(index) {
     if (layer.wasClicked) return;
 
     selectedCountry = e.layer.feature.properties.iso_a3;
-    console.log(selectedCountry);
+    // console.log(selectedCountry);
     leafletContinentLayer.off('click');//Stop listening for click events after first click
     hideCommandModal();//Hide country-select-command modal
     if (selectedCountry === requestedCountryISO) {
@@ -306,7 +306,7 @@ function startStopTimer(command) {
     }, 1000);
   } else {
     clearInterval(timer);
-    console.log("Time needed: " + timePlayed + "s");
+    // console.log("Time needed: " + timePlayed + "s");
   }
 }
 
@@ -378,7 +378,7 @@ function updateHighscore() {
         continentHighscoreFromLocalStorage.splice(i, 0, newEntry); //if yes: insert before this entry
         continentHighscoreFromLocalStorage.pop(); //remove last entry so that we have a highscore with 5 entries again
         localStorage.setItem(selectedContinent, JSON.stringify(continentHighscoreFromLocalStorage));
-        console.log("Highscore for " + selectedContinent + " in localstorage updated");
+        // console.log("Highscore for " + selectedContinent + " in localstorage updated");
         return i + 1; //Return position in highscore
       }
     }
@@ -386,7 +386,7 @@ function updateHighscore() {
     //No entry in localstorage found
   } else {
     //  No highscore yet. Take the empty one from below with the first entry being newEntry
-    console.log("No highscore yet. Take the empty one from below with the first entry being newEntry");
+    // console.log("No highscore yet. Take the empty one from below with the first entry being newEntry");
     let continentHighscore = [
       newEntry,
       { successRate: 0.00, timePlayed: 0 },
@@ -400,7 +400,7 @@ function updateHighscore() {
   }
 
   //New entry not good enough for highscore. No changes to highscore in localstorage.
-  console.log("New entry not good enough for highscore. No changes to highscore in localstorage.");
+  // console.log("New entry not good enough for highscore. No changes to highscore in localstorage.");
   return false;
 }
 
