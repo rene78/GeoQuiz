@@ -314,7 +314,7 @@ function startStopTimer(command) {
 function displayEndOfGameInfobox(position) {
   document.querySelector(".end-of-game-infobox").classList.add("show");
   document.querySelector(".end-of-game-infobox-heading").innerText = localeString("resultHeading");
-  if (!position) document.querySelector(".end-of-game-infobox-result").innerHTML =`${localeString("correctPicks",{correctAnswers, overallCountriesToQuery})} (${Math.round(correctAnswers / overallCountriesToQuery * 100)}%)<br>${localeString("notGoodEnough")}`;
+  if (!position) document.querySelector(".end-of-game-infobox-result").innerHTML = `${localeString("correctPicks", { correctAnswers, overallCountriesToQuery })} (${Math.round(correctAnswers / overallCountriesToQuery * 100)}%)<br>${localeString("notGoodEnough")}`;
   else document.querySelector(".end-of-game-infobox-result").innerText = localeString("veryGood");
   let tableHtml = `
     <thead>
@@ -408,3 +408,17 @@ function updateHighscore() {
 function successRateCalc() {
   return correctAnswers / overallCountriesToQuery;
 }
+
+//Toggle display of welcome infobox when user clicks on side button
+document.querySelector(".expand-button").addEventListener("click", function () {
+  console.log("Toggle fired");
+  document.querySelector(".welcome-infobox").classList.toggle("hide-welcome");
+  document.querySelector(".arrow-image").classList.toggle("mirror-image");
+});
+
+//Hide welcome infobox when user clicks outside of infobox
+document.querySelector("#map").addEventListener("mousedown", function () {
+  console.log("Hide fired");
+  document.querySelector(".welcome-infobox").classList.add("hide-welcome");
+  document.querySelector(".arrow-image").classList.add("mirror-image");
+});
