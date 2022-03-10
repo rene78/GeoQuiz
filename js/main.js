@@ -314,7 +314,7 @@ function startStopTimer(command) {
 function displayEndOfGameInfobox(position) {
   document.querySelector(".end-of-game-infobox").classList.add("show");
   document.querySelector(".end-of-game-infobox-heading").innerText = localeString("resultHeading");
-  if (!position) document.querySelector(".end-of-game-infobox-result").innerHTML =`${localeString("correctPicks")} ${correctAnswers} ${localeString("outOf")} ${overallCountriesToQuery} (${Math.round(correctAnswers / overallCountriesToQuery * 100)}%)<br>${localeString("notGoodEnough")}`;
+  if (!position) document.querySelector(".end-of-game-infobox-result").innerHTML =`${localeString("correctPicks",{correctAnswers, overallCountriesToQuery})} (${Math.round(correctAnswers / overallCountriesToQuery * 100)}%)<br>${localeString("notGoodEnough")}`;
   else document.querySelector(".end-of-game-infobox-result").innerText = localeString("veryGood");
   let tableHtml = `
     <thead>
