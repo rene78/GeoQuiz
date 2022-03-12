@@ -35,7 +35,7 @@ function hideWelcomeInfoboxOnStartup() {
 //Translate text in welcome infobox
 translateWelcomeInfobox();
 function translateWelcomeInfobox() {
-  document.querySelector(".welcome-infobox-intro").innerText = localeString("welcomeInfoboxIntro");
+  document.querySelector(".welcome-infobox-intro").innerHTML = localeString("welcomeInfoboxIntro");
   document.querySelector(".highscore-text").innerText = localeString("highscore");
   document.querySelector(".welcome-infobox-help").innerText = localeString("welcomeInfoboxHelp");
   document.querySelector(".github-text").innerText = localeString("githubText");
