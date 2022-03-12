@@ -23,7 +23,7 @@ addLeafletMap();
 hideWelcomeInfoboxOnStartup();
 function hideWelcomeInfoboxOnStartup() {
   let hideWelcomeInfoboxCheckboxSelected = localStorage.getItem("hideWelcomeInfoboxCheckboxSelected");
-  console.log(hideWelcomeInfoboxCheckboxSelected);
+  // console.log(hideWelcomeInfoboxCheckboxSelected);
   if (hideWelcomeInfoboxCheckboxSelected === "true") {
     hideWelcomeInfobox();
     //Check the checkbox
@@ -31,6 +31,18 @@ function hideWelcomeInfoboxOnStartup() {
     radio.checked = true;
   }
 };
+
+//Translate text in welcome infobox
+translateWelcomeInfobox();
+function translateWelcomeInfobox() {
+  document.querySelector(".welcome-infobox-intro").innerText = localeString("welcomeInfoboxIntro");
+  document.querySelector(".highscore-text").innerText = localeString("highscore");
+  document.querySelector(".welcome-infobox-help").innerText = localeString("welcomeInfoboxHelp");
+  document.querySelector(".github-text").innerText = localeString("githubText");
+  document.querySelector(".translate-text").innerText = localeString("translateText");
+  document.querySelector(".donate-text").innerText = localeString("donateText");
+  document.querySelector("#dont-show-label").textContent = localeString("dontShow");
+}
 
 //Load the continents GeoJSON
 showContinentsGeoJson();
@@ -424,14 +436,14 @@ function successRateCalc() {
 
 //Hide welcome infobox
 function hideWelcomeInfobox() {
-  console.log("Hide fired");
+  // console.log("Hide fired");
   document.querySelector(".welcome-infobox").classList.add("hide-welcome");
   document.querySelector(".arrow-image").classList.add("mirror-image");
 }
 
 //Toggle display of welcome infobox when user clicks on side button
 document.querySelector(".expand-button").addEventListener("click", function () {
-  console.log("Toggle fired");
+  // console.log("Toggle fired");
   document.querySelector(".welcome-infobox").classList.toggle("hide-welcome");
   document.querySelector(".arrow-image").classList.toggle("mirror-image");
 });

@@ -1,5 +1,11 @@
 {
   "selectContinent": "Select the continent you want to play on",
+  "welcomeInfoboxIntro": "Practice your geography skills by picking the right country on a map. All countries of the world are supported.",
+  "welcomeInfoboxHelp": "Want to help?",
+  "githubText": "Improve the code",
+  "translateText": "Translate game",
+  "donateText": "Donate some Sats",
+  "dontShow": "Don't show on startup",
   "africa": "Africa",
   "america": "America",
   "asia": "Asia",

@@ -25,6 +25,119 @@ html, body, .map-container {
 }
 /* #endregion */
 
+/* #region CSS RELATED TO WELCOME INFOBOX */
+.welcome-infobox {
+  text-align: center;
+  position: fixed;
+  opacity: 0.95;
+  z-index: 1003;
+  top: 0px;
+  right: 0;
+  height: 100vh;
+  height: -webkit-fill-available; /* mobile viewport bug fix */
+  width: 230px;
+  border-radius: 30px 0 0 30px;
+  background-color: white;
+  padding: 20px;
+  box-sizing: border-box;
+  transition-property: right;
+  transition-duration: 200ms;
+  transition-timing-function: linear;
+  box-shadow: 0 1px 2px rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+}
+
+.hide-welcome {
+  right: -230px;
+}
+
+.expand-button {
+  width: 25px;
+  height: 50px;
+  /* background-color: white; */
+  top: calc(50% - 25px);
+  position: absolute;
+  left: -25px;
+  border-radius: 10px 0 0 10px;
+
+  border: 0;
+  box-shadow: -2px 2px 2px rgb(60 64 67 / 30%);
+  cursor: pointer;
+  border-right: 1px solid #d4d4d4;
+
+  background: #fff 7px/7px 10px no-repeat;
+  padding: 0;
+}
+
+.expand-button:hover {
+  background-color: #efefef;
+}
+
+.arrow-image {
+  vertical-align: middle;
+}
+
+.mirror-image {
+  transform: scaleX(-1);
+}
+
+.logo {
+  width: 70px;
+}
+
+.welcome-infobox-heading {
+  font-size: 25px;
+  margin: 5px;
+  font-weight: bold;
+}
+
+.welcome-infobox-intro {
+  text-align: left;
+}
+
+.welcome-infobox-links {
+  display: flex;
+  align-items: center;
+  border: 2px solid;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  margin: 10px 0;
+}
+
+.highscore-link {
+  border-color: #F1C950;
+}
+
+.translate-link {
+  border-color: #0064AB;
+}
+
+.donate-link {
+  border-color: #F7931A;
+}
+
+.welcome-infobox-links:hover {
+  border: 2px solid #919191;
+}
+
+.thumbnails {
+  width: 25px;
+  margin-right: 7px;
+}
+
+.welcome-infobox-help {
+  margin-top: 40px;
+  font-weight: bold;
+}
+
+.welcome-infobox-dont-show {
+  position: absolute;
+  bottom: 0;
+}
+/* #endregion */
+
 /* #region CSS RELATED TO 3-2-1 COUNTDOWN TIMER*/
 .countdown-timer {
   pointer-events: none;
@@ -233,115 +346,3 @@ tbody tr:nth-child(even) {
   background-color: #F0F0F0;
 }
 /* #endregion */
-
-.welcome-infobox {
-  text-align: center;
-  position: fixed;
-  opacity: 0.95;
-  z-index: 1003;
-  top: 0px;
-  right: 0;
-  height: 100vh;
-  height: -webkit-fill-available; /* mobile viewport bug fix */
-  width: 230px;
-  border-radius: 30px 0 0 30px;
-  background-color: white;
-  padding: 20px;
-  box-sizing: border-box;
-  transition-property: right;
-  transition-duration: 200ms;
-  transition-timing-function: linear;
-  box-shadow: 0 1px 2px rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
-}
-
-.hide-welcome {
-  right: -230px;
-}
-
-.expand-button {
-  width: 25px;
-  height: 50px;
-  /* background-color: white; */
-  top: calc(50% - 25px);
-  position: absolute;
-  left: -25px;
-  border-radius: 10px 0 0 10px;
-
-  border: 0;
-  box-shadow: -2px 2px 2px rgb(60 64 67 / 30%);
-  cursor: pointer;
-  border-right: 1px solid #d4d4d4;
-
-  background: #fff 7px/7px 10px no-repeat;
-  padding: 0;
-}
-
-.expand-button:hover {
-  background-color: #efefef;
-}
-
-.arrow-image {
-  vertical-align: middle;
-}
-
-.mirror-image {
-  transform: scaleX(-1);
-}
-
-.logo {
-  width: 70px;
-}
-
-.welcome-infobox-heading {
-  font-size: 25px;
-  margin: 5px;
-  font-weight: bold;
-}
-
-.welcome-infobox-intro {
-  /* margin: 10px 10px; */
-  text-align: left;
-}
-
-.welcome-infobox-links {
-  display: flex;
-  align-items: center;
-  border: 2px solid;
-  border-radius: 5px;
-  padding: 5px;
-  cursor: pointer;
-  text-decoration: none;
-  color: black;
-  margin: 10px 0;
-}
-
-.highscore-link {
-  border-color: #F1C950;
-}
-
-.translate-link {
-  border-color: #0064AB;
-}
-
-.donate-link {
-  border-color: #F7931A;
-}
-
-.welcome-infobox-links:hover {
-  border: 2px solid #919191;
-}
-
-.thumbnails {
-  width: 25px;
-  margin-right: 7px;
-}
-
-.welcome-infobox-help {
-  margin-top: 40px;
-  font-weight: bold;
-}
-
-.welcome-infobox-dont-show {
-  position: absolute;
-  bottom: 0;
-}
