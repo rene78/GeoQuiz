@@ -237,18 +237,15 @@ tbody tr:nth-child(even) {
 .welcome-infobox {
   text-align: center;
   position: fixed;
-  /* pointer-events: none; */
-  /* font-size: 20px;
-  font-weight: bold; */
   opacity: 0.95;
   z-index: 1003;
   top: 0px;
   right: 0;
   height: 100vh;
   width: 230px;
+  border-radius: 30px 0 0 30px;
   background-color: white;
-  /* color: white; */
-  padding: 10px;
+  padding: 20px;
   box-sizing: border-box;
   transition-property: right;
   transition-duration: 200ms;
@@ -278,6 +275,10 @@ tbody tr:nth-child(even) {
   padding: 0;
 }
 
+.expand-button:hover {
+  background-color: #efefef;
+}
+
 .arrow-image {
   vertical-align: middle;
 }
@@ -297,6 +298,49 @@ tbody tr:nth-child(even) {
 }
 
 .welcome-infobox-intro {
-  margin: 10px 10px;
+  /* margin: 10px 10px; */
   text-align: left;
+}
+
+.welcome-infobox-links {
+  display: flex;
+  align-items: center;
+  border: 2px solid;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  margin: 10px 0;
+}
+
+.highscore-link {
+  border-color: #F1C950;
+}
+
+.translate-link {
+  border-color: #0064AB;
+}
+
+.donate-link {
+  border-color: #F7931A;
+}
+
+.welcome-infobox-links:hover {
+  border: 2px solid #919191;
+}
+
+.thumbnails {
+  width: 25px;
+  margin-right: 7px;
+}
+
+.welcome-infobox-help {
+  margin-top: 40px;
+  font-weight: bold;
+}
+
+.welcome-infobox-dont-show {
+  position: absolute;
+  bottom: 0;
 }

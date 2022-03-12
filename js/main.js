@@ -19,6 +19,19 @@ let timePlayed = 0;
 //Add the base map without any layers.
 addLeafletMap();
 
+//Hide the welcome infobox, if hideWelcomeInfoboxCheckboxSelected equals "true" in loacal storage
+hideWelcomeInfoboxOnStartup();
+function hideWelcomeInfoboxOnStartup() {
+  let hideWelcomeInfoboxCheckboxSelected = localStorage.getItem("hideWelcomeInfoboxCheckboxSelected");
+  console.log(hideWelcomeInfoboxCheckboxSelected);
+  if (hideWelcomeInfoboxCheckboxSelected === "true") {
+    hideWelcomeInfobox();
+    //Check the checkbox
+    let radio = document.querySelector("#dont-show");
+    radio.checked = true;
+  }
+};
+
 //Load the continents GeoJSON
 showContinentsGeoJson();
 
@@ -409,6 +422,13 @@ function successRateCalc() {
   return correctAnswers / overallCountriesToQuery;
 }
 
+//Hide welcome infobox
+function hideWelcomeInfobox() {
+  console.log("Hide fired");
+  document.querySelector(".welcome-infobox").classList.add("hide-welcome");
+  document.querySelector(".arrow-image").classList.add("mirror-image");
+}
+
 //Toggle display of welcome infobox when user clicks on side button
 document.querySelector(".expand-button").addEventListener("click", function () {
   console.log("Toggle fired");
@@ -417,8 +437,11 @@ document.querySelector(".expand-button").addEventListener("click", function () {
 });
 
 //Hide welcome infobox when user clicks outside of infobox
-document.querySelector("#map").addEventListener("mousedown", function () {
-  console.log("Hide fired");
-  document.querySelector(".welcome-infobox").classList.add("hide-welcome");
-  document.querySelector(".arrow-image").classList.add("mirror-image");
+document.querySelector("#map").addEventListener("mousedown", hideWelcomeInfobox);
+
+//Write status of "Don't show welcome infobox" checkbox to local storage
+document.querySelector("#dont-show").addEventListener("click", function () {
+  let radio = document.querySelector("#dont-show");
+  // console.log(radio.checked);
+  localStorage.setItem("hideWelcomeInfoboxCheckboxSelected", radio.checked);
 });
