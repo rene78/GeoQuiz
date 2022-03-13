@@ -24,5 +24,6 @@
   "timeNeeded": "Time needed",
   "minutesAbbr": "min",
   "secondsAbbr": "s",
-  "playAgainButton": "Play Again"
+  "playAgainButton": "Play Again",
+  "highscoreNoGame": "No game played so far"
 }

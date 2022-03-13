@@ -12,15 +12,15 @@ for (let i = 0; i < continents.length; i++) {
   if (retrievedHighscoreFromLocalStorageJSON !== null) {
     let retrievedHighscoreFromLocalStorage = JSON.parse(retrievedHighscoreFromLocalStorageJSON);
     let tableHtml = `
-    <table class="highscore-${continents[i]}">
+    <table class="highscore-${continents[i]} table-container">
       <thead>
         <tr>
-        <th colspan="3">${localeString(continents[i])}</th>
+          <th colspan="3">${localeString(continents[i])}</th>
         </tr>
         <tr>
-          <th>${localeString("position")}</th>
-          <th>${localeString("correctAnswers")}</th>
-          <th>${localeString("timeNeeded")}</th>
+          <th><h1>${localeString("position")}</h1></th>
+          <th><h1>${localeString("correctAnswers")}</h1></th>
+          <th><h1>${localeString("timeNeeded")}</h1></th>
         </tr>
       </thead>
       <tbody>
@@ -44,5 +44,5 @@ for (let i = 0; i < continents.length; i++) {
 }
 
 if (noHighscoreCounter === 5) {
-  highscores.innerText = "No game played so far";
+  highscores.innerText = localeString("highscoreNoGame");
 }
