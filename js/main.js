@@ -1,10 +1,5 @@
 import { localeCountry, localeString } from './localeUtils.js';
 import { continentsGeoJSON } from '../data/continents.js';
-import { africaGeoJSON } from '../data/africa.js';
-import { americaGeoJSON } from '../data/america.js';
-import { asiaGeoJSON } from '../data/asia.js';
-import { australiaGeoJSON } from '../data/australia.js';
-import { europeGeoJSON } from '../data/europe.js';
 
 let myMap;
 let leafletContinentLayer;
@@ -134,16 +129,19 @@ function showContinentsGeoJson() {
   };
 }
 
-//Remove continents GeoJSON, show the GeoJSON of the selected continent on the map and move on to newCountry functions
-function startGame() {
+//Remove continents GeoJSON, dynamically load and show the GeoJSON of the selected continent on the map and move on to newCountry functions
+async function startGame() {
+  let tempGeoJSON;
   switch (selectedContinent) {
-    case 'africa': continentGeoJSON = africaGeoJSON; break;
-    case 'america': continentGeoJSON = americaGeoJSON; break;
-    case 'asia': continentGeoJSON = asiaGeoJSON; break;
-    case 'australia': continentGeoJSON = australiaGeoJSON; break;
-    case 'europe': continentGeoJSON = europeGeoJSON; break;
+    case 'africa': tempGeoJSON = await import('../data/africa.js'); break;
+    case 'america': tempGeoJSON = await import('../data/america.js'); break;
+    case 'asia': tempGeoJSON = await import('../data/asia.js'); break;
+    case 'australia': tempGeoJSON = await import('../data/australia.js'); break;
+    case 'europe': tempGeoJSON = await import('../data/europe.js'); break;
     default: console.error("Wrong input for continent");
   }
+  continentGeoJSON = tempGeoJSON.geoJSON;
+  // console.log(continentGeoJSON);
 
   overallCountriesToQuery = continentGeoJSON.features.length;
 
