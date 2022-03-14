@@ -17,7 +17,7 @@
   "resultHeading": "Result",
   "correctPicks": "Correct picks: {correctAnswers} out of {overallCountriesToQuery}",
   "notGoodEnough": "That is not good enough for a place on the highscore list",
-  "veryGood": "Very good! You have reached a place in the high score!",
+  "veryGood": "Very good! You have reached position {position} in the high score!",
   "highscore": "Highscore",
   "position": "Position",
   "correctAnswers": "Correct answers",

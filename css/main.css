@@ -1,7 +1,12 @@
 /* #region CSS RELATED TO GENERAL PAGE LAYOUT */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.42em;
+  color:#A7A1AE;
+  background-color:#1F2739;
 }
 
 html, body, .map-container {
@@ -37,7 +42,7 @@ html, body, .map-container {
   height: -webkit-fill-available; /* mobile viewport bug fix */
   width: 270px;
   border-radius: 30px 0 0 30px;
-  background-color: white;
+  background-color: #1f2739;
   padding: 20px;
   box-sizing: border-box;
   transition-property: right;
@@ -53,23 +58,21 @@ html, body, .map-container {
 .expand-button {
   width: 25px;
   height: 50px;
-  /* background-color: white; */
   top: calc(50% - 25px);
   position: absolute;
   left: -25px;
   border-radius: 10px 0 0 10px;
-
+  opacity: 0.7;
   border: 0;
   box-shadow: -2px 2px 2px rgb(60 64 67 / 30%);
   cursor: pointer;
-  border-right: 1px solid #d4d4d4;
-
-  background: #fff 7px/7px 10px no-repeat;
+  border-right: 1px solid #4a4242;
+  background: #1f2739 7px/7px 10px no-repeat;
   padding: 0;
 }
 
 .expand-button:hover {
-  background-color: #efefef;
+  opacity: .95;
 }
 
 .arrow-image {
@@ -88,6 +91,7 @@ html, body, .map-container {
   font-size: 25px;
   margin: 5px;
   font-weight: bold;
+  color: #4DC3FA;
 }
 
 .welcome-infobox-intro {
@@ -102,13 +106,17 @@ html, body, .map-container {
   padding: 5px;
   cursor: pointer;
   text-decoration: none;
-  color: black;
+  color: inherit;
   margin: 10px 0;
   text-align: left;
 }
 
 .highscore-link {
   border-color: #F1C950;
+}
+
+.github-link {
+  border-color: #FDFDF9;
 }
 
 .translate-link {
@@ -205,7 +213,7 @@ html, body, .map-container {
 .command-container, .result {
   text-align: center;
   position: fixed;
-  opacity: .6;
+  opacity: 0.7;
   pointer-events: none;
   font-size: 20px;
   font-weight: bold;
@@ -217,8 +225,7 @@ html, body, .map-container {
   left: 0;
   right: 0;
   padding: 5px 60px 5px 40px;
-  background-color: black;
-  color: white;
+  background-color: #1f2739;
 }
 
 .hide-command {
@@ -281,6 +288,65 @@ html, body, .map-container {
 }
 /* #endregion */
 
+/* #region CSS RELATED TO TABLES (IN END OF GAME INFOBOX AND HIGHSCORE HTML) */
+h1 {
+  font-size:3em; 
+  font-weight: 300;
+  line-height:1em;
+  text-align: center;
+  color: #4DC3FA;
+  margin-bottom: 25px;
+}
+
+#highscores {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.table-container th h1 {
+  font-weight: bold;
+  font-size: 1em;
+  text-align: left;
+  color: #185875;
+  margin: 3px;
+}
+
+th[colspan]:not([colspan="1"]) {
+  text-align: center;
+}
+
+.table-container td {
+  font-weight: normal;
+  font-size: 1em;
+  -webkit-box-shadow: 0 2px 2px -2px #0E1119;
+    -moz-box-shadow: 0 2px 2px -2px #0E1119;
+          box-shadow: 0 2px 2px -2px #0E1119;
+}
+
+.table-container {
+  margin: 0px 10px 20px;
+}
+
+.table-container td, .table-container th {
+  padding: 5px;
+}
+
+/* Background-color of the odd rows */
+.table-container tr:nth-child(odd) {
+  background-color: #323C50;
+}
+
+/* Background-color of the even rows */
+.table-container tr:nth-child(even) {
+  background-color: #2C3446;
+}
+
+.table-container th {
+  background-color: #1c2434;
+}
+/* #endregion */
+
 /* #region CSS RELATED TO END OF GAME INFOBOX */
 .end-of-game-infobox {
   position: Fixed;
@@ -303,8 +369,7 @@ html, body, .map-container {
   margin: 10px;
   padding: 5px 20px 13px 20px;
   border-radius: 10px;
-  background-color: #FFFFFF;
-  background: linear-gradient(#FFFFFF, #999999);
+  background-color: #1f2739;
   pointer-events: Auto;
   cursor: Default;
   text-align: center;
@@ -313,8 +378,7 @@ html, body, .map-container {
 .play-again-button {
   position: relative;
   width: 200px;
-  /* left: calc(50% - 100px); */
-  background-color: #4CAF50;
+  background-color: #185875;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -323,27 +387,20 @@ html, body, .map-container {
   display: inline-block;
   font-size: 16px;
   cursor: pointer;
-  box-shadow: 2px 5px 4px #888888;
+  box-shadow: 2px 5px 4px #231f2e;
   border-radius: 8px;
 }
 
 .play-again-button:hover {
-  background-color: #247727;
+  background-color: #1b6c91;
 }
 
 .end-of-game-infobox-highscore {
   margin: 10px auto;
 }
 
-thead {
-  background-color: grey;
-}
-
 #last-game {
-  background-color: lightgreen;
-}
-
-tbody tr:nth-child(even) {
-  background-color: #F0F0F0;
+  background-color: #4DC3FA;
+  color: white;
 }
 /* #endregion */

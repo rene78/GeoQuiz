@@ -249,7 +249,7 @@ function newCountry() {
     // console.log("Game finished!");
     startStopTimer("stop");
     // console.log("Correct answers: " + correctAnswers + " out of " + overallCountriesToQuery);
-    document.querySelector(".command").innerText = "";
+    document.querySelector(".command").innerText = "Game over";
     let position = updateHighscore();
     displayEndOfGameInfobox(position);
   }
@@ -338,16 +338,16 @@ function displayEndOfGameInfobox(position) {
   document.querySelector(".end-of-game-infobox").classList.add("show");
   document.querySelector(".end-of-game-infobox-heading").innerText = localeString("resultHeading");
   if (!position) document.querySelector(".end-of-game-infobox-result").innerHTML = `${localeString("correctPicks", { correctAnswers, overallCountriesToQuery })} (${Math.round(correctAnswers / overallCountriesToQuery * 100)}%)<br>${localeString("notGoodEnough")}`;
-  else document.querySelector(".end-of-game-infobox-result").innerText = localeString("veryGood");
+  else document.querySelector(".end-of-game-infobox-result").innerText = localeString("veryGood", { position });
   let tableHtml = `
     <thead>
       <tr>
       <th colspan="3">${localeString("highscore")} - ${localeString(selectedContinent)}</th>
       </tr>
       <tr>
-        <th>${localeString("position")}</th>
-        <th>${localeString("correctAnswers")}</th>
-        <th>${localeString("timeNeeded")}</th>
+        <th><h1>${localeString("position")}</h1></th>
+        <th><h1>${localeString("correctAnswers")}</h1></th>
+        <th><h1>${localeString("timeNeeded")}</h1></th>
       </tr>
     </thead>
     <tbody>
