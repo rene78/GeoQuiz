@@ -35,7 +35,7 @@ html, body, .map-container {
   text-align: center;
   position: fixed;
   opacity: 0.95;
-  z-index: 1003;
+  z-index: 1013;
   top: 0px;
   right: 0;
   height: 100vh;
@@ -366,13 +366,14 @@ th[colspan]:not([colspan="1"]) {
 
 .end-of-game-infobox>div {
   position: relative;
-  margin: 10px;
   padding: 5px 20px 13px 20px;
   border-radius: 10px;
   background-color: #1f2739;
   pointer-events: Auto;
   cursor: Default;
   text-align: center;
+  width: fit-content;
+  margin: 35px auto;
 }
 
 .play-again-button {

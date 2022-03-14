@@ -249,7 +249,7 @@ function newCountry() {
     // console.log("Game finished!");
     startStopTimer("stop");
     // console.log("Correct answers: " + correctAnswers + " out of " + overallCountriesToQuery);
-    document.querySelector(".command").innerText = "Game over";
+    document.querySelector(".command").innerText = localeString("gameOver");
     let position = updateHighscore();
     displayEndOfGameInfobox(position);
   }
