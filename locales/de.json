@@ -1,7 +1,7 @@
 {
   "selectContinent": "Wähle den Kontinent zum Spielen aus",
-  "welcomeInfoboxIntro": "Trainiere Deine Geographie&shy;kenntnisse, indem Du das richtige Land auf einer Karte auswählst. Es werden sämtliche Staaten der Welt unterstützt.",
-  "welcomeInfoboxHelp": "Möchtest du mithelfen?",
+  "welcomeInfoboxIntro": "Trainiere Dei­ne Geographie&shy;­kenntnisse, indem Du das richtige Land auf einer Karte auswählst. Es werden sämtliche Staaten der Welt unterstützt.",
+  "welcomeInfoboxHelp": "Möchtest Du mithelfen?",
   "githubText": "Verbessere den Code",
   "translateText": "Übersetze das Spiel",
   "donateText": "Spende ein paar Sats",
@@ -14,15 +14,17 @@
   "select": "Selektiere",
   "correct": "Korrekt!",
   "wrong": "Falsch",
+  "gameOver": "Spiel beendet",
   "resultHeading": "Ergebnis",
   "correctPicks": "Richtig gewählt: {correctAnswers} von {overallCountriesToQuery}",
   "notGoodEnough": "Das ist nicht gut genug für einen Platz auf der Bestenliste",
-  "veryGood": "Sehr gut! Du hast einen Platz in der Bestenliste ergattert!",
+  "veryGood": "Sehr gut! Du hast Platz {position} in der Bestenliste erreicht!",
   "highscore": "Bestenliste",
   "position": "Position",
   "correctAnswers": "Korrekte Antworten",
   "timeNeeded": "Benötigte Zeit",
   "minutesAbbr": "min",
   "secondsAbbr": "s",
-  "playAgainButton": "Erneut spielen"
+  "playAgainButton": "Erneut spielen",
+  "highscoreNoGame": "Bislang kein Spiel gespielt"
 }
