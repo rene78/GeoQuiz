@@ -1,5 +1,5 @@
 {
-  "selectContinent": "Wähle den Kontinent zum Spielen aus",
+  "selectRegion": "Wähle die Region zum Spielen aus",
   "welcomeInfoboxIntro": "Trainiere Dei­ne Geographie&shy;­kenntnisse, indem Du das richtige Land auf einer Karte auswählst. Es werden sämtliche Staaten der Welt unterstützt.",
   "welcomeInfoboxHelp": "Möchtest Du mithelfen?",
   "githubText": "Verbessere den Code",
@@ -11,6 +11,9 @@
   "asia": "Asien",
   "australia": "Australien und Ozeanien",
   "europe": "Europa und Russland",
+  "all-countries": "Alle Länder",
+  "deu-states": "Deutschland - Bundesländer",
+  "usa-states": "USA - Staaten",
   "select": "Selektiere",
   "correct": "Korrekt!",
   "wrong": "Falsch",

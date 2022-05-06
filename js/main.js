@@ -1,5 +1,5 @@
 import { localeCountry, localeString } from './localeUtils.js';
-import { continentsGeoJSON } from '../data/continents.js';
+import { regions } from '../data/regions.js';
 
 let myMap;
 let leafletContinentLayer;
@@ -14,7 +14,7 @@ let timePlayed = 0;
 //Add the base map without any layers.
 addLeafletMap();
 
-//Hide the welcome infobox, if hideWelcomeInfoboxCheckboxSelected equals "true" in loacal storage
+//Hide the welcome infobox, if hideWelcomeInfoboxCheckboxSelected equals "true" in local storage
 hideWelcomeInfoboxOnStartup();
 function hideWelcomeInfoboxOnStartup() {
   let hideWelcomeInfoboxCheckboxSelected = localStorage.getItem("hideWelcomeInfoboxCheckboxSelected");
@@ -26,6 +26,38 @@ function hideWelcomeInfoboxOnStartup() {
     radio.checked = true;
   }
 };
+
+//Show request
+document.querySelector(".command").innerText = localeString("selectRegion");
+
+//Build the selection infobox
+buildSelectionWindow();
+function buildSelectionWindow() {
+  let regionSelectionHtml = "";
+  for (let i = 0; i < regions.length; i++) {
+    //heading
+    regionSelectionHtml += `
+    <div class="continent-selector">
+      <div class="continent-heading">${localeString(regions[i][0])}</div>
+    `;
+    //elements
+    for (let j = 0; j < regions[i].length; j++) {
+      if (j === 0) {
+        regionSelectionHtml += `
+        <div class="continent-element" id="${regions[i][j]}">${localeString("all-countries")}</div>
+      `;
+      } else {
+        regionSelectionHtml += `
+        <div class="continent-element" id="${regions[i][j]}">${localeString(regions[i][j])}</div>
+      `;
+      }
+    }
+    regionSelectionHtml += `
+    </div>
+    `;
+  }
+  document.querySelector(".selection-container").innerHTML = regionSelectionHtml;
+}
 
 //Translate text in welcome infobox
 translateWelcomeInfobox();
@@ -39,9 +71,6 @@ function translateWelcomeInfobox() {
   document.querySelector("#dont-show-label").textContent = localeString("dontShow");
 }
 
-//Load the continents GeoJSON
-showContinentsGeoJson();
-
 //Add a Leaflet map to the page
 function addLeafletMap() {
   const EsriWorldShadedRelief = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}', {
@@ -51,95 +80,16 @@ function addLeafletMap() {
   });
 
   myMap = L.map('map', {
-    //center: [0, 0], //defined by "fitBounds"
-    //zoom: 4, //defined by "fitBounds"
+    center: [38, 44], //defined by "fitBounds"
+    zoom: 4, //defined by "fitBounds"
     zoomControl: false, //hide zoom control buttons
     layers: EsriWorldShadedRelief
   });
 }
 
-//Show GeoJSON polygons of all continents on the Leaflet map so the user can select the continent he wants to guess the countries from
-//Show message "Select continent"
-function showContinentsGeoJson() {
-  //Show request
-  document.querySelector(".command").innerText = localeString("selectContinent");
-
-  let leafletContinents = L.geoJSON(continentsGeoJSON, {
-    onEachFeature: onEachFeature,
-    style: style
-  })
-  // console.log(leafletContinents.getLayers());
-  leafletContinents.addTo(myMap);
-  //Center and zoom the map on the provided GeoJSON
-  myMap.fitBounds(leafletContinents.getBounds());
-  //What happens when clicking or hovering over each polygon
-  function onEachFeature(feature, layer) {
-    // console.log(feature);
-    // console.log(layer);
-
-    //Change opacity to 0.9 when polygon gets focus
-    layer.on('mouseover', function (e) {
-      // console.log(layer);
-      highlightOnOff(0.9, feature);
-    });
-
-    //Change opacity back to 0.7 when polygon loses focus
-    layer.on('mouseout', function (e) {
-      highlightOnOff(0.7, feature);
-    });
-
-    //bind click
-    layer.on('click', function (e) {
-      selectedContinent = feature.properties.continent;
-      // console.log(selectedContinent);
-      startGame();
-    });
-
-    //Add contintent name as a tooltip
-    const tooltipContent = localeString(feature.properties.continent);
-    layer.bindTooltip(tooltipContent);
-  }
-
-  //Style the polygons according to continent
-  function style(feature) {
-    let style = { "opacity": 1, "fillOpacity": 0.7, "color": "#555555", "weight": 2 };
-    // console.log(feature.properties.continent);
-    switch (feature.properties.continent) {
-      case 'africa': style.fillColor = "#4F93C0"; break;
-      case 'america': style.fillColor = "#AC5C91"; break;
-      case 'asia': style.fillColor = "#8A84A3"; break;
-      case 'australia': style.fillColor = "#D09440"; break;
-      case 'europe': style.fillColor = "#D5DC76"; break;
-    }
-    // console.log(style);
-    return style;
-  }
-
-  function highlightOnOff(fillOpacity, feature) {
-
-    let continentOfHighlightedPolygon = feature.properties.continent;
-    // console.log(continentOfHighlightedPolygon);
-
-    //For each layer (i.e. polygon) of the layerGroup (i.e. the GeoJSON) the code below is executed.
-    leafletContinents.eachLayer(function (layer) {
-      if (layer.feature.properties.continent == continentOfHighlightedPolygon) {
-        layer.setStyle({ fillOpacity }) //equals "fillOpacity: fillOpacity"
-      }
-    });
-  };
-}
-
 //Remove continents GeoJSON, dynamically load and show the GeoJSON of the selected continent on the map and move on to newCountry functions
 async function startGame() {
-  let tempGeoJSON;
-  switch (selectedContinent) {
-    case 'africa': tempGeoJSON = await import('../data/africa.js'); break;
-    case 'america': tempGeoJSON = await import('../data/america.js'); break;
-    case 'asia': tempGeoJSON = await import('../data/asia.js'); break;
-    case 'australia': tempGeoJSON = await import('../data/australia.js'); break;
-    case 'europe': tempGeoJSON = await import('../data/europe.js'); break;
-    default: console.error("Wrong input for continent");
-  }
+  const tempGeoJSON = await import('../data/' + selectedContinent + '.js');
   continentGeoJSON = tempGeoJSON.geoJSON;
   // console.log(continentGeoJSON);
 
@@ -372,8 +322,8 @@ function displayEndOfGameInfobox(position) {
 //Start a new game when clicking on "Play again"
 document.querySelector(".play-again-button").addEventListener("click", function () {
   document.querySelector(".end-of-game-infobox").classList.remove("show"); //Hide end of game infobox
+  document.querySelector(".selection-container").classList.remove("hide"); //Show game selection
   removeAllGeoJSON(); //Remove all GeoJSON layers before reloading the continents GeoJSON
-  showContinentsGeoJson();
   //Reset some global variables and update display
   correctAnswers = 0;
   timePlayed = 0;
@@ -448,10 +398,21 @@ document.querySelector(".expand-button").addEventListener("click", function () {
 
 //Hide welcome infobox when user clicks outside of infobox
 document.querySelector("#map").addEventListener("mousedown", hideWelcomeInfobox);
+document.querySelector(".selection-container").addEventListener("mousedown", hideWelcomeInfobox);
 
 //Write status of "Don't show welcome infobox" checkbox to local storage
 document.querySelector("#dont-show").addEventListener("click", function () {
   let radio = document.querySelector("#dont-show");
   // console.log(radio.checked);
   localStorage.setItem("hideWelcomeInfoboxCheckboxSelected", radio.checked);
+});
+
+//Write selected region (continent/country) to variable and start the game
+document.querySelectorAll(".continent-element").forEach(function (elem) {
+  elem.addEventListener("click", function (e) {
+    // console.log(e.target.id);
+    document.querySelector(".selection-container").classList.add("hide");
+    selectedContinent = e.target.id;
+    startGame();
+  });
 });

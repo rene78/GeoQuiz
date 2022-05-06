@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Name and iso-a3 extractor</title>
+</head>
+
+<body>
+  <textarea id="textareabox" cols="110" rows="30"
+    placeholder="Please paste your GeoJSON code here. The tool will extract name and iso_a3, formats it properly and outputs it"
+    autofocus></textarea>
+  <br>
+  <input type="button" class="button" value="Extract" onclick="checkInput()" />
+  <div id="outputCode"></div>
+
+
+  <script>
+    //This tool creates the right format for /locales/countryNames.js out of a GeoJSON
+    function checkInput() {
+      const input = document.getElementById("textareabox").value;
+      const inputGeoJSON = JSON.parse(input);
+      let alreadyInOutput = [];
+      let output = "";
+
+      for (let i = 0; i < inputGeoJSON.features.length; i++) {
+        let doubleEntry = checkIfAlreadyInOutput(inputGeoJSON.features[i].properties.iso_a3);
+        if (doubleEntry === -1) {
+          output += `{ "alpha3": "${inputGeoJSON.features[i].properties.iso_a3}", "ar": "", "bg": "", "cs": "", "da": "", "de": "", "el": "", "en": "${inputGeoJSON.features[i].properties.name}", "eo": "", "es": "", "et": "", "eu": "", "fi": "", "fr": "", "hu": "", "it": "", "ja": "", "ko": "", "lt": "", "nl": "", "no": "", "pl": "", "pt": "", "ro": "", "ru": "", "sk": "", "sv": "", "th": "", "uk": "", "zh": "", "": "" },\n`;
+          alreadyInOutput.push(inputGeoJSON.features[i].properties.iso_a3);
+        }
+      };
+      var outputTextarea = "<h2>Result</h2><p>This code can be pasted straight to the bottom of /locales/countryNames.js</p> <textarea id=textareabox cols=150 rows=30 readonly>" + output + "</textarea>";
+      document.getElementById("outputCode").innerHTML = outputTextarea;
+
+      function checkIfAlreadyInOutput(currentIsoA3) {
+        return index = alreadyInOutput.findIndex(i => i === currentIsoA3);
+      }
+    }
+  </script>
+</body>
+
+</html>

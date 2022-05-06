@@ -57,7 +57,7 @@ async function loadLanguageFile(locale) {
 //Taken from https://github.com/stefalda/react-localization/blob/master/src/LocalizedStrings.js and simplified. Thanks Stefano!
 export function localeString(localeString, valuesForPlaceholders) {
   // console.log(locale);
-  const translatedStringNoVarsFilledIn= languageFilePreferredLanguage[localeString] || languageFileEN[localeString];//load translation. If empty string --> fall back to English
+  const translatedStringNoVarsFilledIn = languageFilePreferredLanguage[localeString] || languageFileEN[localeString];//load translation. If empty string --> fall back to English
 
   const placeholderRegex = /(\{[\d|\w]+\})/;
   const res = (translatedStringNoVarsFilledIn || '')
@@ -85,7 +85,7 @@ import { countryNames } from '../locales/countryNames.js';
 export function localeCountry(countryToLookUpAlpha3) {
   countryToLookUpAlpha3 = countryToLookUpAlpha3.toLowerCase();//Change country code to lower case, e.g. TUN --> tun
   // console.log(countryToLookUpAlpha3);
-  const countryToLookUpIndex = countryNames.findIndex(i => i.alpha3 === countryToLookUpAlpha3);//Locate index of country in countryNames array
+  const countryToLookUpIndex = countryNames.findIndex(i => i.alpha3.toLocaleLowerCase() === countryToLookUpAlpha3);//Locate index of country in countryNames array
   // console.log(countryToLookUpIndex);
   // console.log(preferredBrowserLanguage);
   const countryName = countryNames[countryToLookUpIndex][preferredBrowserLanguage];//load country name in preferred language
