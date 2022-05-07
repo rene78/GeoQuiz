@@ -323,6 +323,7 @@ function displayEndOfGameInfobox(position) {
 document.querySelector(".play-again-button").addEventListener("click", function () {
   document.querySelector(".end-of-game-infobox").classList.remove("show"); //Hide end of game infobox
   document.querySelector(".selection-container").classList.remove("hide"); //Show game selection
+  document.querySelector(".command").innerText = localeString("selectRegion"); //Show request in command infobox on top
   removeAllGeoJSON(); //Remove all GeoJSON layers before reloading the continents GeoJSON
   //Reset some global variables and update display
   correctAnswers = 0;
