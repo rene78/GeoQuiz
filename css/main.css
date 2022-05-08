@@ -98,7 +98,7 @@ html, body, .map-container {
   text-align: left;
 }
 
-.welcome-infobox-links {
+.welcome-infobox-links, .continent-element {
   display: flex;
   align-items: center;
   border: 2px solid;
@@ -420,6 +420,7 @@ th[colspan]:not([colspan="1"]) {
   top: 70px;
   overflow: auto;
   max-height: 80vh;
+  max-width: 90vw;
   opacity: .7;
 }
 
@@ -446,5 +447,10 @@ th[colspan]:not([colspan="1"]) {
 .continent-element:hover {
   cursor: pointer;
   background-color: #323C50;
+}
+
+/*Make sure that mouse click cannot be triggered on subelements of .continent-element.*/
+.continent-element > * {
+  pointer-events: none;
 }
 /* #endregion */

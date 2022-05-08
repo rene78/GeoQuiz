@@ -2,8 +2,8 @@
 //Names have to be similar as the geojson-files in /data 
 export const regions = [
   ["africa"],
-  ["america", "usa-states"],
-  ["asia"],
+  ["america", "us"],
+  ["asia", "cn", "my"],
   ["australia"],
-  ["europe", "deu-states", "fra-regions"]
+  ["europe", "de", "fr"]
 ];

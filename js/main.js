@@ -48,7 +48,10 @@ function buildSelectionWindow() {
       `;
       } else {
         regionSelectionHtml += `
-        <div class="continent-element" id="${regions[i][j]}">${localeString(regions[i][j])}</div>
+        <div class="continent-element" id="${regions[i][j]}">
+          <img src="./img/flags/${regions[i][j]}.svg" alt="Flag icon" class="thumbnails">
+          <span>${localeString(regions[i][j])}</span>
+        </div>
       `;
       }
     }
