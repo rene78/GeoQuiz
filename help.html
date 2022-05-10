@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help</title>
+
+  <!-- style related -->
+  <link rel="stylesheet" type="text/css" media="screen" href="./css/help.css" />
+</head>
+
+<body>
+  <h1>Add new region to the game</h1>
+  <p>Below is the workflow to add a new region to the game</p>
+  <h2>Workflow overview</h2>
+  <ul>
+    <li>Fork repository</li>
+    <li>Get or create GeoJSON file of the new region</li>
+    <li>Add a property named <i>en</i> to the GeoJSON and name each region</li>
+    <li>Optional: Simplify GeoJSON to decrease file size with <a href="https://mapshaper.org/" target="_blank"></a></li>
+    <li>Use the tool <a href="https://geoquiz.renek.cc/filepreparator.html" target="_blank">GeoQuiz File Preparator</a> to create an optimized GeoJSON and name file</li>
+    <li>Safe GeoJSON in /data folder named with 2-digit country code, e.g. <i>jp.js</i></li>
+    <li>Add region names to the end of locales/countryNames.js</li>
+    <li>Add 2-digit country code to /data/regions.js</li>
+    <li>Your new region should show up in the game</li>
+
+  </ul>
+  <h2>Step-by-step explanation</h2>
+  <p>In this example we are adding the districts of Japan to the game.</p>
+  <h3>Video</h3>
+  <p>Check out this video if you don't like to read</p>
+  <h1 style="color: red">Add video</h1>
+  <ol>
+    <li>
+      Fork or download the <a href="https://github.com/rene78/GeoQuiz" target="_blank">GeoQuiz repository</a>
+      <img src="./img/help/AddNewRegion01.png" alt="Fork repo">
+    </li>
+    <li>Open your text editor (e.g. VS Code) and open the forked GeoQuiz project</li>
+    <li>...</li>
+
+  </ol>
+</body>
+
+</html>
