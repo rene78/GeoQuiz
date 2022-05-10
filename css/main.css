@@ -431,7 +431,13 @@ th[colspan]:not([colspan="1"]) {
 .continent-selector {
   margin: 2px;
   background-color: #1c2434;
-  padding: 5px;
+  padding: 0px 10px;
+}
+
+@media (max-width: 600px){
+  .continent-selector {
+    width: 100%;
+  }
 }
 
 .continent-heading {
