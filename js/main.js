@@ -420,3 +420,32 @@ document.querySelectorAll(".continent-element").forEach(function (elem) {
     startGame();
   });
 });
+
+//Close welcome infobox on right swipe (mobile)
+let start = null;
+const welcomeInfobox = document.querySelector(".welcome-infobox");
+welcomeInfobox.addEventListener("touchstart",function(event){
+  if(event.touches.length === 1){
+     //just one finger touched
+     start = event.touches.item(0).clientX;
+   }else{
+     //a second finger hit the screen, abort the touch
+     start = null;
+   }
+ });
+
+ welcomeInfobox.addEventListener("touchend",function(event){
+  let offset = 100;//at least 100px are a swipe
+  if(start){
+    //the only finger that hit the screen left it
+    let end = event.changedTouches.item(0).clientX;
+
+    if(end > start + offset){
+     //a left -> right swipe
+     hideWelcomeInfobox();
+    }
+    if(end < start - offset ){
+     //a right -> left swipe
+    }
+  }
+});
